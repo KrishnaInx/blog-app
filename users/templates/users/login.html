@@ -1,0 +1,118 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+<div style="background-color:#cbd5db">
+    <!-- Container containing all contents -->
+    <div class="container">
+        {% csrf_token %}
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-8 col-xl-8">
+                <!-- White Container -->
+                <div class="container bg-white rounded mt-4 mb-4 px-0">
+                    <!-- Main Heading -->
+                    <div class="row justify-content-center align-items-center pt-3">
+                        <h2><strong>Login</strong></h2>
+
+                    </div>
+                    <div class="pt-3 pb-3">
+                        <form class="form-horizontal" method="POST">
+                            {% csrf_token %}
+                            <!-- User Name Input -->
+                            <div class="form-group row justify-content-center px-3">
+                                {{ form|crispy}}
+                            </div> <!-- CheckBox Remember Me-->
+                            <div class="form-group row justify-content-center px-3">
+                                <div class="col-9">
+                                    <div class="row">
+                                        <div class="col-6 px-0">
+                                            <div class="custom-control custom-checkbox mb-3"> <input id="customCheck1" type="checkbox" class="custom-control-input checkbox-muted"> <label for="customCheck1" class="custom-control-label text-muted">Remember Me</label> </div>
+                                        </div> <!-- Forgot Password Link -->
+<!--                                        -->
+                                        <div class="col-6 px-0 text-right"> <span><a href="{% url 'password_reset' %}" class="text-danger"><b>Forgot Password?</b></a></span> </div>
+                                    </div>
+                                </div>
+                            </div> <!-- Log in Button -->
+                            <div class="form-group row justify-content-center">
+                                <div class="col-3 px-3"> <input type="submit" value="Log in" class="btn btn-block btn-secondary"> </div>
+
+                            </div>
+
+                        </form>
+                    </div> <!-- Alternative Login -->
+                    <div class="mx-0 px-0 bg-light">
+                        <div class="pt-1">
+                            <div class="row justify-content-center pt-3">
+                                <h4><strong>Login</strong></h4>
+
+                            </div>
+                            <div class="row justify-content-center">
+                                <p>With your social media account</p>
+                            </div> <!-- Social Media Login buttons -->
+                            <div class="row justify-content-center pt-4">
+                                <div class="col-10">
+                                    <div class="row justify-content-center">
+                                        <!-- Twitter Connect -->
+                                        <div class="col-7 col-sm-4 px-1 pb-1"> <a href="{% provider_login_url 'github' %}" class="btn btn-block btn-social btn-github"> <span class="fab fa-github"></span> GitHub </a> </div> <!-- Facebook Connect -->
+                                        <div class="col-7 col-sm-4 px-1 pb-1"> <a href="{% provider_login_url 'facebook' %}" class="btn btn-block btn-social btn-facebook"> <span class="fab fa-facebook-f"></span> Facebook </a> </div> <!-- Google Connect -->
+                                        <div class="col-7 col-sm-4 px-1 pb-1"> <a href="{% provider_login_url 'google' %}" class="btn btn-block btn-social btn-google"> <span class="fab fa-google-plus"></span> Google+ </a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- Horizontal Line -->
+                        <div class="px-4 pt-3">
+                            <hr>
+                        </div> <!-- Register Now -->
+                        <div class="pt-1">
+                            <div class="row justify-content-center">
+                                <p>Don't have an Account?<span><a href="{%  url 'register' %}" class="text"> Register Now!</a></span></p>
+                            </div>
+                            <div class="row justify-content-center align-items-center pt-2 pb-5">
+                                <div class="col-4"> <a href="{%  url 'register' %}" class="btn btn-block btn-secondary"> REGISTER </a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    <div class="content-section ">-->
+<!--        <form method="POST">-->
+<!--            {% csrf_token %}-->
+<!--            <fieldset class="form-group ">-->
+<!--                <legend class="border-bottom mb-4">LOGIN</legend>-->
+<!--                {{ form|crispy}}-->
+<!--            </fieldset>-->
+<!--            <div class="form-group">-->
+<!--                <button class="btn btn-outline-info" type="submit">Login</button>-->
+<!--            </div>-->
+<!--            <div class="justify-content-center align-items-center mt-3 mb-3">-->
+<!--                <span class="line"></span>-->
+<!--                <small class="line-text px-2">OR</small>-->
+<!--                <span class="line"></span>-->
+<!--            </div>-->
+<!--            <button class="btn btn-outline-danger d-flex justify-content-start align-items-center mb-2">-->
+<!--            <i class="fa fa-github ml-2"></i> <span class="ml-5 px-4"><a href="{% url 'social:begin' 'github' %}">Continue with GitHub</a></span> </button>-->
+<!--            <button class="btn btn-outline-danger d-flex justify-content-start align-items-center mb-2">-->
+<!--                <i class="fas fa-twitter"></i> <span class="ml-5 px-4"><a href="{% url 'social:begin' 'twitter' %}">Continue with Twitter</a></span> </button>-->
+<!--            <button class="btn btn-outline-danger d-flex justify-content-start align-items-center mb-2">-->
+<!--            <i class="fa fa-github ml-2"></i> <span class="ml-5 px-4"><a href="{% url 'social:begin' 'facebook' %}">Continue with Facebook</a></span> </button>-->
+<!--            <button class="btn btn-outline-danger d-flex justify-content-start align-items-center mb-2">-->
+<!--            <i class="fa fa-github ml-2"></i> <span class="ml-5 px-4"><a href="{% provider_login_url 'google' %}">Continue with Goggle</a></span> </button>-->
+
+<!--        </form>-->
+<!--        <div class="border-top pt-3">-->
+<!--            <small class="text-muted">-->
+<!--                New to Blogs? <a class="ml-2" href="{%  url 'register' %}">Sign In</a>-->
+<!--            </small>-->
+<!--        </div>-->
+
+
+<!--    </div>-->
+
+{% endblock content %}
