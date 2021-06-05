@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
+from django.contrib.postgres.search import SearchVector
 from .forms import CommentForm
 from .models import Post, Comment
 
@@ -135,7 +135,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 def SearchPage(request):
     if request.method == 'GET':
         srh = request.GET['query']
-        context = {'posts': Post.objects.all().filter(title=srh)}
+        context = {'posts': Post.objects.annotate(search=SearchVector('content', 'title'),).filter(search=srh)}
 
         return render(request, 'blog/search_page.html', context)
 

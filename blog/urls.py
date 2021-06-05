@@ -18,3 +18,4 @@ urlpatterns = [
     path('search/', views.SearchPage, name='search_result'),
 
 ]
+

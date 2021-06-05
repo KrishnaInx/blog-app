@@ -48,3 +48,12 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 
+@login_required
+def pass_change(request):
+    if request.method == 'POST':
+        form = PasswordChangingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'users/profile.html')
+
+
